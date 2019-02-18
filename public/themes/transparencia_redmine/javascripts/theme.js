@@ -130,7 +130,7 @@
       }
   }
 
-  /* Personalización - CeSPI - Plan Estratégico */
+  /* Personalización - CeSPI - Transparencia */
 
   function removeRedmineMenu() {
     $('.action-login #menu').remove();
@@ -139,7 +139,7 @@
   $(document).ready(removeRedmineMenu);
 
   function addUnlpBanner() {
-    var banner = '<div id="logo"><img src="themes/strategic_plan_redmine/images/logounlp.svg" alt="Plan Estratégico"></div><div id="banner"><img src="themes/strategic_plan_redmine/images/banner-login.png" alt="Plan Estratégico"></div>';
+    var banner = '<div id="logo"><img src="themes/transparencia_redmine/images/logounlp.svg" alt="Transparencia-universitaria"></div><div id="banner"><img src="themes/transparencia_redmine/images/banner-login.png" alt=""></div>';
     $('.action-login #header').html(banner);
   }
   $(document).ready(addUnlpBanner);
@@ -168,7 +168,7 @@
   }
   $(document).ready(addCollapseMenu);*/
 
-  /* Fin personalización - CeSPI - Plan Estratégico */
+  /* Fin personalización - CeSPI - Transparencia */
 
   removeRule();
 })( window );
