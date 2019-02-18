@@ -1,0 +1,103 @@
+body {
+ font-family: 'Open Sans', Helvetika, Calibri, Arial, sans-serif;
+ font-size: 100%;
+ padding: 0 !important;
+ margin: 0;
+ position: relative;
+ left: 0;
+ right: 0;
+}
+
+h1, h2, h3, h4 {
+ font-family: 'Open Sans', Helvetika, Calibri, Arial, sans-serif;
+ padding: 2px 10px 1px 0px;
+ margin: 0 0 10px 0;
+}
+
+#header h1 {
+ font-size: 1.5em;
+}
+
+#main-menu {
+ background-color: #eee;
+ padding: 0.4em 0;
+ left: 0;
+}
+
+#main-menu li a.selected, #main-menu li a.selected:hover {
+ border-bottom:none;
+ font-weight: bold;
+ background: none;
+ color: black;
+}
+
+#main-menu li a {
+ border-bottom: 0 !important;
+}
+
+#main-menu li a:hover {
+ opacity:0.5;
+}
+
+#content {
+ background-color: #ffffff !important;
+}
+
+#projects-index {
+ column-count: auto;
+ column-width: inherit;
+}
+
+#projects-index ul.projects li.root>ul.projects {
+ border-left:none;
+ padding-left: 1em;
+}
+
+ul.projects li.root {
+ background-color: #ffffff;
+ border: none;
+}
+
+#projects-index ul.projects div.root a.project {
+ font-family: "Open Sans", sans-serif;
+ font-weight: bold;
+ font-size: 0.9em;
+ margin: 0 0 10px 0;
+}
+
+#projects-index a:link {
+ color: #000;
+ text-decoration: none;
+ font-weight: bold;
+}
+
+.burger .one, .burger .two, .burger .three {
+ background: #000;
+}
+
+.controller-activities #activity dl {
+ background: #f6f6f6;
+ border:none;
+ margin: 0 0 10px 0px;
+ padding: 10px 0 0 10px;
+ line-height: 24px;
+}
+
+table.list {
+ border-radius: 6px;
+ overflow: hidden;
+ height: 50px;
+ border: 2px solid #eeeff3;
+ border-spacing: 0;
+ color: #6b7d94;
+ font-size: 0.9em;
+}
+
+div#projects-index  div.wiki.description {
+  display: none;
+}
+
+
+#projects-index ul.projects li.child>ul.projects{
+	display:none;
+};

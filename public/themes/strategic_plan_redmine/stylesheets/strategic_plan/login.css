@@ -1,0 +1,162 @@
+﻿body.action-login {
+  font-family:"Open Sans",arial,sans-serif;
+  font-size: 1em;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+.action-login #wrapper {
+ margin:auto;
+ text-align: left;
+ width: 100%;
+}
+
+.action-login img {
+ display: inline-block;
+}
+
+.action-login #header {
+ text-align: left;
+ width: 100%;
+ margin: 0;
+ padding: 0;
+ border: none;
+}
+
+.action-login #logo {
+ height:100px;
+ margin-left:5%;
+}
+
+.action-login #banner img {
+ width:100%;
+}
+
+.action-login #content {
+ text-align: left;
+ width: 100%;
+ margin: 0;
+ padding: 0;
+ background-color: white;
+ min-height: 0;
+}
+
+.action-login #login {
+ text-align: left;
+ width: 100%;
+ margin: 1em 0em;
+ padding: 0;
+}
+
+.action-login #saml-login {
+ text-align: center;
+ width: 32%;
+ margin: 3% 0 3% 34%;
+ font-weight: normal;
+}
+
+.action-login #saml-login a {
+ display: inline-block;
+ width:100%;
+ padding: 0.5em 0em;
+ text-align: center;
+ color: #fff;
+ background-color: #02545e;
+ text-decoration: none !important;
+ border-radius: 4px;
+ box-sizing: border-box;
+ resize: vertical;
+}
+
+.action-login #saml-login a:hover {
+ opacity: 0.5;
+ padding: 0.5em 0em;
+ width: 100%;
+ background-color: #02545e;
+ border-radius: 4px;
+}
+
+.action-login #login-form {
+ width: 32%;
+ margin: 0 0 0 34%;
+ padding: 0;
+ border: none;
+ background-color: white;
+ border-radius: 0;
+ box-sizing: border-box;
+ display: none;
+}
+
+.action-login .lost_password {
+ margin-left: 7em;
+ float: none !important;
+}
+
+.action-login #login-form input[type=text],
+.action-login #login-form input[type=password],
+.action-login #login-form select,
+.action-login #login-form textarea {
+ width: 100%;
+ padding: 12px;
+ border: 1px solid #ccc;
+ border-radius: 4px;
+ box-sizing: border-box;
+ resize: vertical;
+ margin-bottom: 0;
+}
+
+.action-login label {
+ padding: 12px 12px 12px 0;
+ display: inline-block;
+ font-weight: normal !important;
+}
+
+.action-login input[type=submit] {
+ display: inline-block;
+ padding: 0.5em 8em;
+ text-align: center;
+ color: #fff;
+ background-color: #2fac66;
+ text-decoration: none !important;
+ border:none;
+ width:100%;
+ font-size: 1em;
+ margin: 1em 0em;
+ border-radius: 4px;
+ box-sizing: border-box;
+ resize: vertical;
+}
+
+.action-login input[type=submit]:hover {
+ opacity: 0.5;
+}
+
+.action-login #footer {
+ text-align: center;
+ width: 100%;
+ font-size: 0.8em;
+ border-top: 0;
+ color: black;
+}
+
+@media only screen and (max-width: 600px) {
+ .action-login #saml-login {
+  text-align: center;
+  width: 90%;
+  margin-left: 5%;
+ }
+
+ .action-login #login-form {
+  width: 90%;
+  margin-left: 5%;
+ }
+
+ .action-login .lost_password {
+  margin-left: 2em;
+ }
+
+ .action-login #logo {
+  text-align: center;
+ }
+}
