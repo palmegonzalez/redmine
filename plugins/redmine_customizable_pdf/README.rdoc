@@ -1,0 +1,5 @@
+= redmine customizable PDF
+
+This plugin allows you to customize the PDF of the issues.
+
+Tested with Redmine 3.4 only.

@@ -1,0 +1,6 @@
+source 'https://nexus.desarrollo.unlp.edu.ar/repository/cespigems'
+
+gem 'rest-client'
+
+#Extern people
+gem "integrator_extern_people", "~> 0.1.2"

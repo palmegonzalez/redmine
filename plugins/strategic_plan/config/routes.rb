@@ -1,0 +1,1 @@
+ get '/rest_search/:custom_field_id', :to => 'rest_requests#search', :as => 'rest_requests_search'

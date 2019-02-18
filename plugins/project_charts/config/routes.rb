@@ -1,0 +1,1 @@
+get 'charts', :to => 'charts#index'

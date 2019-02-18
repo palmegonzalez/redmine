@@ -1,0 +1,56 @@
+<style>
+  li.select2-selection__choice[title="null"] {
+    display: none;
+  }
+</style>
+
+<select id="<%= tag_id %>"
+        name="<%= tag_name %>"
+        class="<%= options[:class] %> select2-ajax"
+        style="width: 100%"
+        multiple="multiple">
+</select>
+
+<script>
+
+  var $element = $('.select2-ajax').select2({
+    multiple: true,
+    minimumInputLength: 4,
+    placeholder: 'Buscar miembros...',
+    width: '100%',
+    language: {
+      inputTooShort: function () {
+        return "Ingrese 4 o más caracteres...";
+      },
+      noResults: function () {
+        return "No se han encontrado resultados.";
+      },
+      searching: function () {
+        return "Buscando...";
+      },
+      errorLoading: function () {
+        return "Error al cargar los resultados.";
+      }
+
+    },
+    ajax: {
+      url: '<%= rest_requests_search_url(custom_value.custom_field) %>',
+      dataType: 'json'
+    }
+
+  });
+
+  var data = JSON.parse('<%=  Redmine::RestRequests.as_select2(custom_value) %>');
+
+  var blankOption = new Option(null, null, true, true);
+  blankOption.locked = "locked";
+  $element.append(blankOption);
+  for (var d = 0; d < data.length; d++) {
+    var item = data[d];
+    var option = new Option(item.text, item.id, true, true);
+    $element.append(option);
+  }
+
+  $element.trigger('change');
+
+</script>

@@ -1,0 +1,5 @@
+= redmine private issues
+
+This plugin set default true the private field of all issues when is enabled.
+
+Tested with Redmine 3.4 only.

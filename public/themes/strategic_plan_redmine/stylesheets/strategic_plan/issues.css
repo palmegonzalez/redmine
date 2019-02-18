@@ -1,0 +1,11 @@
+#history .journal.has-details {
+    display: none;
+}
+
+#history .journal.has-notes.has-details {
+    display: block;
+}
+
+#history .journal.has-notes.has-details .details {
+    display: none;
+}

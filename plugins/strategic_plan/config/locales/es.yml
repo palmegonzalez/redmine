@@ -1,0 +1,24 @@
+es:
+  label_members_plural: Participantes
+  label_empty_members: No hay participantes
+  label_restAPI: Rest API
+  field_token: Token
+  field_get_endpoint: Get Endpoint
+  field_search_endpoint: Search Endpoint
+
+  hints:
+    status:
+      nueva: "<span title='Nueva: acción recién creada. En este estado puede ser editada toda la información.' class='field-description'>Estado</span>"
+      en-gestion: "<span title='En gestión: acción en gestión. Cierta información no puede ser editada en este estado.' class='field-description'>Estado</span>"
+      a-atender: "<span title='A atender: acción a atender por un responsable. Sólo los responsables y administradores pueden editar la información en este estado.' class='field-description'>Estado</span>"
+      resuelta: "<span title='Resuelta: acción finalizada sin problemas. No puede ser editada la información en este estado.' class='field-description'>Estado</span>"
+      cancelada: "<span title='Cancelada: acción cancelada por alguna problemática. Sólo los administradores pueden editar información en este estado.' class='field-description'>Estado</span>"
+      rechazada: "<span title='Rechazada: acción rechazada por falta o fallas en la información. Sólo los administradores pueden editar información en este estado.' class='field-description'>Estado</span>"
+    priority:
+      baja: "<span title='Baja: para acciones e información complementaria.' class='field-description'>Prioridad</span>"
+      normal: "<span title='Normal: prioridad por defecto.' class='field-description'>Prioridad</span>"
+      alta: "<span title='Alta: acciones que requieren ser realizadas para destrabar otras acciones. Los responsables pueden establecer los niveles de prioridad de cada acción.' class='field-description'>Prioridad</span>"
+      urgente: "<span title='Urgente: acciones que deben ser resueltas con urgencia debido a imposiciones de la coyuntura.' class='field-description'>Prioridad</span>"
+  hint_assigned_to: <span title='Usuario de RÜPÜ a cargo de la realización de la Subtarea'>Asignado a</span>
+  hint_status: "<span title='Nueva: acción recién creada. En este estado puede ser editada toda la información.\n En gestión: acción en gestión. Cierta información no puede ser editada en este estado.\n A atender: acción a atender por un responsable. Sólo los responsables y administradores pueden editar la información en este estado.\n Resuelta: acción finalizada sin problemas. No puede ser editada la información en este estado. \n Cancelada: acción cancelada por alguna problemática. Sólo los administradores pueden editar información en este estado. \n Rechazada: acción rechazada por falta o fallas en la información. Sólo los administradores pueden editar información en este estado.' class='field-description'>Estado</span>"
+  hint_priority: "<span title='Baja: para acciones e información complementaria.\nNormal: prioridad por defecto. \nAlta: acciones que requieren ser realizadas para destrabar otras acciones. Los responsables pueden establecer los niveles de prioridad de cada acción. \nUrgente: acciones que deben ser resueltas con urgencia debido a imposiciones de la coyuntura.' class='field-description'>Prioridad</span>"

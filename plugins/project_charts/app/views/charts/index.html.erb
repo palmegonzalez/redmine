@@ -1,0 +1,75 @@
+<div id="container" style="height: 100%; min-width: 310px; max-width: 100%; margin: 0 auto"></div>
+
+<script type="text/javascript">
+
+Highcharts.chart('container', {
+
+    chart: {
+        type: 'bubble',
+        plotBorderWidth: 1,
+        zoomType: 'xy',
+        marginBottom: 100
+    },
+
+    legend: {
+        enabled: false
+    },
+
+    title: {
+        text: '<%= @chart_data[:title] %>'
+    },
+
+    subtitle: {
+        text: '<%= @chart_data[:subtitle] %>'
+    },
+    xAxis: {
+      type: 'datetime',
+      title: {
+        text: '<%= @chart_data[:xAxis_title] %>'
+      },
+      labels: {
+        format: '{value: %m-%Y}'
+      },
+      min: Date.UTC(2018, 5, 1),
+      max: Date.UTC(2018, 10, 1),
+      minTickInterval: 28*24*3600*1000
+    },
+    yAxis: {
+        startOnTick: false,
+        endOnTick: false,
+        title: {
+            text: '<%= @chart_data[:yAxis_title] %>'
+        },
+        labels: {
+            format: '<%= @chart_data[:yAxis_label] %>'
+        },
+        maxPadding: 0.2,
+        min: 0,
+        max: 100
+    },
+    tooltip: {
+        useHTML: true,
+        headerFormat: '<table>',
+        pointFormat: '<tr><th colspan="2"><h3>{point.complete_name}</h3></th></tr>' +
+            '<tr><th><%= @chart_data[:tooltip_x] %>:</th><td>{point.x: %e/%m/%Y}</td></tr>' +
+            '<tr><th><%= @chart_data[:tooltip_y] %>:</th><td>{point.y}%</td></tr>' +
+            '<tr><th><%= @chart_data[:tooltip_z] %>:</th><td>{point.z}</td></tr>',
+        footerFormat: '</table>',
+        followPointer: true
+    },
+    plotOptions: {
+        series: {
+            dataLabels: {
+                enabled: true,
+                format: '{point.name}'
+            }
+        }
+    },
+
+    series: [{
+        data: JSON.parse('<%= @chart_data[:series]%>')
+    }]
+
+});
+
+</script>
