@@ -1,0 +1,5 @@
+# Spanish strings go here for Rails i18n
+es:
+  disabled_notes: Deshabilitar notas en PDF
+  disabled_details: Deshabilitar detalles en PDF
+  label_history: Notas

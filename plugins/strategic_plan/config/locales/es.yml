@@ -1,0 +1,7 @@
+es:
+  label_members_plural: Participantes
+  label_empty_members: No hay participantes
+  label_restAPI: Rest API
+  field_token: Token
+  field_get_endpoint: Get Endpoint
+  field_search_endpoint: Search Endpoint

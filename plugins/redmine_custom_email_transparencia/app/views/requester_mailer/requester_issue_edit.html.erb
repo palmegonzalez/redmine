@@ -1,0 +1,27 @@
+<html>
+<head>
+</head>
+<body>
+<% if @journal.nil? || @journal.notes.empty? %>
+  <p>Hemos encontrado problemas en su petición. A la brevedad recibirá instrucciones a este email de cómo subsanarla</p>
+<% else %>
+  <p>
+	Por medio de la presente, se le notifica que hemos encontrado problemas en su petición y debe subsanarla. Para ello, responda este mail con lo que se le solicita a continuación:
+	<br>
+	<br>
+	----------------------------------------
+	<br>
+	<%= @journal.notes %>
+	<br>
+	----------------------------------------
+	<br>
+	<br>
+	En caso de no recibir respuesta en dos días corridos, su petición será cerrada.
+
+	Muchas gracias
+  </p>
+
+<% end %>
+
+</body>
+</html>

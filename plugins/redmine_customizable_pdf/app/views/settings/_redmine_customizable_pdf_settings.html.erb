@@ -1,0 +1,8 @@
+<p>
+  <%=content_tag(:label, l(:disabled_notes))%>
+  <%=check_box_tag 'settings[disabled_notes]', true, @settings['disabled_notes'] %>
+</p>
+<p>
+  <%=content_tag(:label, l(:disabled_details))%>
+  <%=check_box_tag 'settings[disabled_details]', true, @settings['disabled_details'] %>
+</p>
