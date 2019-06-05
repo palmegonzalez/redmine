@@ -234,14 +234,14 @@ module Redmine
         # Returns a PDF string of a list of issues
         def issues_to_pdf(issues, project, query)
           pdf = ITCPDF.new(current_language, "L")
-          title = query.new_record? ? l(:label_issue_plural) : query.name
-          title = "#{project} - #{title}" if project
+
+          title = project.parent ? "#{project.parent} - #{project}" : "#{project}"
+
           pdf.set_title(title)
-          pdf.alias_nb_pages
-          pdf.footer_date = format_date(User.current.today)
-          pdf.set_auto_page_break(false)
+          pdf.set_auto_page_break(true, pdf.get_footer_margin)
           pdf.add_page("L")
-  
+          pdf.setPrintFooter(false)
+
           # Landscape A4 = 210 x 297 mm
           page_height   = pdf.get_page_height # 210
           page_width    = pdf.get_page_width  # 297
@@ -263,8 +263,8 @@ module Redmine
             col_width = col_width.map {|w| w * (page_width - right_margin - left_margin) / table_width}
             table_width = col_width.inject(0, :+)
           end
-  
-          # title
+
+          # Print title
           pdf.SetFontStyle('B',11)
           pdf.RDMCell(190, 8, title)
           pdf.ln
@@ -275,59 +275,90 @@ module Redmine
             pdf.SetFontStyle('B',10)
             pdf.RDMCell(table_width, 6, totals.join("  "), 0, 1, 'R')
           end
-
           totals_by_group = query.totals_by_group
-          render_table_header(pdf, query, col_width, row_height, table_width)
-          previous_group = false
-          result_count_by_group = query.result_count_by_group
 
+          # Loop entre las issues
+          previous_group = false
           issue_list(issues) do |issue, level|
-            if query.grouped? &&
-                 (group = query.group_by_column.value(issue)) != previous_group
+            if query.grouped? && (group = query.group_by_column.value(issue)) != previous_group
               pdf.SetFontStyle('B',10)
-              group_label = group.blank? ? 'None' : group.to_s.dup
-              group_label << " (#{result_count_by_group[group]})"
-              pdf.bookmark group_label, 0, -1
-              pdf.RDMCell(table_width, row_height * 2, group_label, 'LR', 1, 'L')
+
+              # Programa General
+              pg_label = "#{group.parent.parent}"
+              # Programa Especifico
+              pe_label = "#{group.parent}"
+              # SubPrograma
+              sp_label = "#{group}"
+              # Print PG, PE, SP
+              pdf.RDMCell(table_width, row_height * 2, pg_label, 0, 1, 'L')
+              pdf.RDMCell(table_width, row_height * 2, pe_label, 0, 1, 'L')
+              pdf.RDMCell(table_width, row_height * 2, sp_label, 0, 1, 'L')
+
               pdf.SetFontStyle('',8)
 
               totals = totals_by_group.map {|column, total| "#{column.caption}: #{total[group]}"}.join("  ")
               if totals.present?
                 pdf.RDMCell(table_width, row_height, totals, 'LR', 1, 'L')
               end
+
+              # Genera el encabezado de la tabla
+              render_table_header(pdf, query, col_width, row_height, table_width)
+
               previous_group = group
             end
-  
+
             # fetch row values
             col_values = fetch_row_values(issue, query, level)
-  
+
             # make new page if it doesn't fit on the current one
             base_y     = pdf.get_y
             max_height = get_issues_to_pdf_write_cells(pdf, col_values, col_width)
             space_left = page_height - base_y - bottom_margin
+
             if max_height > space_left
               pdf.add_page("L")
-              render_table_header(pdf, query, col_width, row_height, table_width)
               base_y = pdf.get_y
             end
-  
+
+            #Set color issue fill depend tracker
+            case issue.tracker
+              when (Tracker.find_by_name 'Subtarea en gestión permanente')
+                # Percentage null
+                col_values[3] = "-"
+                pdf.set_fill_color(117, 199, 252)
+              when (Tracker.find_by_name 'SubPrograma Operativo')
+                pdf.set_fill_color(255, 78, 85)
+              when (Tracker.find_by_name 'Subtarea')
+                pdf.set_fill_color(202, 234, 255)
+              when (Tracker.find_by_name 'Proyecto')
+                pdf.set_fill_color(255, 112, 117)
+              when (Tracker.find_by_name 'Obras')
+                pdf.set_fill_color(255, 150, 154)
+              else
+                pdf.set_fill_color(255, 255, 255)
+            end
+
             # write the cells on page
             issues_to_pdf_write_cells(pdf, col_values, col_width, max_height)
             pdf.set_y(base_y + max_height)
-  
+
             if query.has_column?(:description) && issue.description?
               pdf.set_x(10)
               pdf.set_auto_page_break(true, bottom_margin)
-              pdf.RDMwriteHTMLCell(0, 5, 10, '', issue.description.to_s, issue.attachments, "LRBT")
+              pdf.set_fill_color(206, 206, 206)
+              pdf.RDMwriteHTMLCell(0, 5, 10, '', "Descripcion: ", [], "LRT", 1, 1)
+              pdf.RDMwriteHTMLCell(0, 5, 10, '', issue.description.to_s, issue.attachments, "LRB", 1, 1)
               pdf.set_auto_page_break(false)
             end
 
             if query.has_column?(:last_notes) && issue.last_notes.present?
               pdf.set_x(10)
               pdf.set_auto_page_break(true, bottom_margin)
-              pdf.RDMwriteHTMLCell(0, 5, 10, '', issue.last_notes.to_s, [], "LRBT")
+              pdf.set_fill_color(234, 234, 234)
+              pdf.RDMwriteHTMLCell(0, 5, 10, '', "Nota: ", [], "LRT", 1, 1)
+              pdf.RDMwriteHTMLCell(0, 5, 10, '', issue.last_notes.to_s, [], "LRB", 1, 1)
               pdf.set_auto_page_break(false)
-          end
+            end
           end
   
           if issues.size == Setting.issues_export_limit.to_i
@@ -450,7 +481,7 @@ module Redmine
           # iterate while need to correct and lock coluns width
           while done == 0
             # calculate free & locked columns width
-            done = 1
+            done = pdf.set_fill_color(242, 127, 82)
             ratio = table_width / col_width.inject(0, :+)
 
             # correct columns width
@@ -480,7 +511,7 @@ module Redmine
         def render_table_header(pdf, query, col_width, row_height, table_width)
           # headers
           pdf.SetFontStyle('B',8)
-          pdf.set_fill_color(230, 230, 230)
+          pdf.set_fill_color(237, 237, 237)
 
           base_x     = pdf.get_x
           base_y     = pdf.get_y
@@ -492,7 +523,6 @@ module Redmine
 
           # rows
           pdf.SetFontStyle('',8)
-          pdf.set_fill_color(255, 255, 255)
         end
 
         # returns the maximum height of MultiCells
